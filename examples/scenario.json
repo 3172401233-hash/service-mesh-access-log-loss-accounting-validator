@@ -1,0 +1,45 @@
+{
+  "rules": {
+    "rules": [
+      { "id": "health-off", "pathPrefix": "/health", "sampled": false },
+      { "id": "all", "percent": 100 }
+    ],
+    "default": { "id": "default-off", "sampled": false }
+  },
+  "events": [
+    { "type": "entry", "at": "2026-11-24T03:00:10.000Z", "seq": 1, "requestId": "req-ok", "attempt": 0, "path": "/api/orders", "method": "POST", "status": 200 },
+    { "type": "sample", "at": "2026-11-24T03:00:11.000Z", "requestId": "req-ok", "attempt": 0, "sampled": true, "ruleId": "all" },
+    { "type": "enqueue", "at": "2026-11-24T03:00:12.000Z", "requestId": "req-ok", "attempt": 0, "seq": 101 },
+    { "type": "flush", "at": "2026-11-24T03:00:13.000Z", "requestId": "req-ok", "attempt": 0, "batchId": "batch-1" },
+    { "type": "response", "at": "2026-11-24T03:00:14.000Z", "requestId": "req-ok", "attempt": 0, "status": 200 },
+    { "type": "backend_log", "at": "2026-11-24T03:00:15.000Z", "requestId": "req-ok", "attempt": 0, "seq": 102 },
+    { "type": "billing_log", "at": "2026-11-24T03:00:16.000Z", "requestId": "req-ok", "attempt": 0, "seq": 103 },
+
+    { "type": "entry", "at": "2026-11-24T03:00:20.000Z", "seq": 2, "requestId": "req-buf", "attempt": 0, "path": "/api/orders", "method": "GET", "status": 200 },
+    { "type": "sample", "at": "2026-11-24T03:00:21.000Z", "requestId": "req-buf", "attempt": 0, "sampled": true, "ruleId": "all" },
+    { "type": "enqueue", "at": "2026-11-24T03:00:22.000Z", "requestId": "req-buf", "attempt": 0, "seq": 201 },
+    { "type": "restart", "at": "2026-11-24T03:00:25.000Z", "restartId": "rst-1" },
+
+    { "type": "entry", "at": "2026-11-24T03:00:30.000Z", "seq": 3, "requestId": "req-dup", "attempt": 0, "path": "/api/orders", "method": "POST", "status": 200 },
+    { "type": "sample", "at": "2026-11-24T03:00:31.000Z", "requestId": "req-dup", "attempt": 0, "sampled": true, "ruleId": "all" },
+    { "type": "enqueue", "at": "2026-11-24T03:00:32.000Z", "requestId": "req-dup", "attempt": 0, "seq": 301 },
+    { "type": "flush", "at": "2026-11-24T03:00:33.000Z", "requestId": "req-dup", "attempt": 0, "batchId": "batch-2" },
+    { "type": "duplicate_send", "at": "2026-11-24T03:00:34.000Z", "requestId": "req-dup", "attempt": 0, "sink": "backend", "seq": 302 },
+    { "type": "response", "at": "2026-11-24T03:00:35.000Z", "requestId": "req-dup", "attempt": 0, "status": 200 },
+    { "type": "backend_log", "at": "2026-11-24T03:00:36.000Z", "requestId": "req-dup", "attempt": 0, "seq": 303 },
+    { "type": "backend_log", "at": "2026-11-24T03:00:37.000Z", "requestId": "req-dup", "attempt": 0, "seq": 304 },
+    { "type": "billing_log", "at": "2026-11-24T03:00:38.000Z", "requestId": "req-dup", "attempt": 0, "seq": 305 },
+
+    { "type": "entry", "at": "2026-11-24T03:00:40.000Z", "seq": 4, "requestId": "req-5xx", "attempt": 0, "path": "/api/pay", "method": "POST", "status": 503 },
+    { "type": "sample", "at": "2026-11-24T03:00:41.000Z", "requestId": "req-5xx", "attempt": 0, "sampled": true, "ruleId": "all" },
+    { "type": "enqueue", "at": "2026-11-24T03:00:42.000Z", "requestId": "req-5xx", "attempt": 0, "seq": 401 },
+    { "type": "flush", "at": "2026-11-24T03:00:43.000Z", "requestId": "req-5xx", "attempt": 0, "batchId": "batch-3" },
+    { "type": "response", "at": "2026-11-24T03:00:44.000Z", "requestId": "req-5xx", "attempt": 0, "status": 503 },
+
+    { "type": "entry", "at": "2026-11-24T03:00:50.000Z", "seq": 5, "requestId": "req-health", "attempt": 0, "path": "/health", "method": "GET", "status": 200 },
+    { "type": "sample", "at": "2026-11-24T03:00:51.000Z", "requestId": "req-health", "attempt": 0, "sampled": false, "ruleId": "health-off" },
+
+    { "type": "backend_log", "at": "2026-11-24T03:00:55.000Z", "requestId": "req-ghost", "attempt": 0, "seq": 900 },
+    { "type": "billing_log", "at": "2026-11-24T03:00:56.000Z", "seq": 901 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "access-log-ledger",
+  "version": "1.0.0",
+  "description": "本地访问日志账本：对采样、异步写入、重启丢失、重复写入和后端失败进行分阶段对账",
+  "type": "module",
+  "engines": {
+    "node": ">=24.16.0"
+  },
+  "bin": {
+    "log-ledger": "bin/report.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node bin/report.js examples/scenario.json --summary"
+  }
+}
